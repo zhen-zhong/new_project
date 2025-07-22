@@ -1,0 +1,29 @@
+
+/* 这是引入 Tailwind v4 样式的全新、正确的方式，请保留。 */
+@import "tailwindcss";
+
+/* 
+  在这里定义你的 CSS 变量。
+  这个代码块代表了默认的（亮色）主题。
+*/
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.custom-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
