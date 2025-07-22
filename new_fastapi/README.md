@@ -50,6 +50,9 @@ PROJECT_NAME="My Awesome Todo API"
 ### 5. 运行应用
 uvicorn app.main:app --reload
 
+## 同步requirements.txt
+pip freeze > requirements.txt
+
 ### 6. 访问 API 文档
 1. Swagger UI: http://127.0.0.1:8000/docs
 2. ReDoc: http://127.0.0.1:8000/redoc
