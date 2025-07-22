@@ -48,23 +48,23 @@
 
 
 # ===================================================================
-#  FastAPI Project (located in /fastapi/)
+#  FastAPI Project (located in /new_fastapi/)
 # ===================================================================
 
 # Python virtual environment
-/fastapi/venv/
-/fastapi/.venv/
-/fastapi/env/
-/fastapi/ENV/
+/new_fastapi/venv/
+/new_fastapi/.venv/
+/new_fastapi/env/
+/new_fastapi/ENV/
 
 # Python cache
-/fastapi/**/__pycache__/
-/fastapi/**/*.pyc
-/fastapi/**/*.pyo
-/fastapi/**/*.pyd
+/new_fastapi/**/__pycache__/
+/new_fastapi/**/*.pyc
+/new_fastapi/**/*.pyo
+/new_fastapi/**/*.pyd
 
 # database files
-/fastapi/*.sqlite3
+/new_fastapi/*.sqlite3
 
 
 # ===================================================================
