@@ -1,0 +1,23 @@
+# .gitignore
+
+# 虚拟环境
+venv/
+.venv/
+env/
+ENV/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 数据库文件
+*.sqlite3
+
+# 环境变量文件
+.env
+
+# IDE/Editor specific
+.idea/
+.vscode/
