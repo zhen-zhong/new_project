@@ -1,63 +1,78 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# ===================================================================
+#  IDE / Editor / OS Specific - Global Ignores
+#  这些规则通常是全局性的，适用于任何子项目。
+# ===================================================================
+.idea/
+.vscode/
 .DS_Store
 *.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# ===================================================================
+#  Next.js Project (located in /new_nextjs/)
+# ===================================================================
 
-# vercel
-.vercel
+# dependencies
+/new_nextjs/node_modules/
+/new_nextjs/.pnp/
+/new_nextjs/.pnp.*
+/new_nextjs/.yarn/
+!/new_nextjs/.yarn/patches/
+!/new_nextjs/.yarn/plugins/
+!/new_nextjs/.yarn/releases/
+!/new_nextjs/.yarn/versions/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# PNPM specific (如果你使用 pnpm)
+/new_nextjs/.pnpm-store/
 
-# 虚拟环境
-venv/
-.venv/
-env/
-ENV/
+# build output & cache
+/new_nextjs/.next/
+/new_nextjs/out/
+/new_nextjs/build/
+/new_nextjs/*.tsbuildinfo
 
-# Python 缓存
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# testing
+/new_nextjs/coverage/
 
-# 数据库文件
-*.sqlite3
+# debug logs
+/new_nextjs/npm-debug.log*
+/new_nextjs/yarn-debug.log*
+/new_nextjs/yarn-error.log*
+/new_nextjs/.pnpm-debug.log*
 
-# 环境变量文件
-.env
+# vercel deployment output
+/new_nextjs/.vercel/
 
-# IDE/Editor specific
-.idea/
-.vscode/
+# auto-generated typescript file
+/new_nextjs/next-env.d.ts
+
+
+# ===================================================================
+#  FastAPI Project (located in /fastapi/)
+# ===================================================================
+
+# Python virtual environment
+/fastapi/venv/
+/fastapi/.venv/
+/fastapi/env/
+/fastapi/ENV/
+
+# Python cache
+/fastapi/**/__pycache__/
+/fastapi/**/*.pyc
+/fastapi/**/*.pyo
+/fastapi/**/*.pyd
+
+# database files
+/fastapi/*.sqlite3
+
+
+# ===================================================================
+#  Environment Variables - Crucial for Security!
+#  忽略所有子项目中的 .env 文件。
+# ===================================================================
+# Use a more specific pattern to avoid accidentally ignoring valid files.
+# This will ignore .env, .env.local, .env.production, etc. in ANY subdirectory.
+**/.env*
+# If you want to commit a template file, un-ignore it explicitly:
+# !.env.example
