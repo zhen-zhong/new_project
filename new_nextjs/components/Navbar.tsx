@@ -13,6 +13,7 @@ const navLinks = [
   { name: '博客', href: '/blog' },
   { name: '项目', href: '/projects' },
   { name: '关于', href: '/about' },
+  { name: '聊天', href: '/chat' },
 ];
 
 export function Navbar() {
