@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import Image from 'next/image';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { Github, Menu, X } from 'lucide-react';
 
@@ -32,7 +33,15 @@ export function Navbar() {
         {/* 左侧：Logo */}
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold">Nexty</span>
+            {/* <span className="font-bold">Nexty</span> */}
+            <Image
+              src="/next.svg"         
+              alt="liyang.live"        
+              width={100}             
+              height={24}            
+              className="dark:invert"
+              priority
+            />
           </Link>
         </div>
 
