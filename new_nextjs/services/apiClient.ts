@@ -5,7 +5,7 @@ import axios from 'axios';
 const apiClient = axios.create({
   // 从环境变量中读取后端的基地址
   // 这使得在不同环境（开发、生产）中使用不同 API 地址变得容易
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL + '/api/v1' || 'http://localhost:8000/api/v1',
   // 设置一个默认的请求超时时间 (例如：10秒)
   timeout: 10000,
 });

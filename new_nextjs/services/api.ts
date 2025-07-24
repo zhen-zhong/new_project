@@ -1,9 +1,25 @@
 import apiClient from "./apiClient";
 import { AxiosResponse, AxiosProgressEvent } from 'axios'
 
-export const promoterLogin = <T>(params: any = {}): Promise<AxiosResponse<T>> => {
+export const test = <T>(params: any = {}): Promise<AxiosResponse<T>> => {
     return apiClient({
-        url: `/home/promoter/login`,
+        url: `/`,
+        method: 'get',
+        data: params,
+    });
+};
+
+export const register = <T>(params: any = {}): Promise<AxiosResponse<T>> => {
+    return apiClient({
+        url: `/register`,
+        method: 'post',
+        data: params,
+    });
+};
+
+export const login = <T>(params: any = {}): Promise<AxiosResponse<T>> => {
+    return apiClient({
+        url: `/login`,
         method: 'post',
         data: params,
     });

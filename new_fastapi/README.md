@@ -69,8 +69,10 @@ my_fastapi_project/
 │   ├── api/              # API 路由
 │   │   └── v1/           # API 版本 v1
 │   │       └── endpoints/
-│   │           └── todos.py
+│   │           └── login.py
+│   │           └── register.py
 │   ├── core/             # 核心逻辑 (配置等)
+│   │   └── database.py
 │   ├── models/           # 数据库 ORM 模型
 │   └── schemas/          # Pydantic 数据校验模型
 ├── tests/                # 测试文件目录

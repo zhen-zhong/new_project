@@ -5,6 +5,8 @@ from fastapi import APIRouter
 from app.api.v1.endpoints import items as v1_items
 from app.api.v1.endpoints import users as v1_users
 from app.api.v1.endpoints import llm as v1_llm
+from app.api.v1.endpoints import register as v1_register
+from app.api.v1.endpoints import login as v1_login
 
 # 创建一个主 API 路由器
 api_router = APIRouter()
@@ -15,3 +17,5 @@ api_router = APIRouter()
 api_router.include_router(v1_items.router, prefix="/v1/items", tags=["v1-items"])
 api_router.include_router(v1_users.router, prefix="/v1/users", tags=["v1-users"])
 api_router.include_router(v1_llm.router, prefix="/v1/llm", tags=["v1-llm"])
+api_router.include_router(v1_register.register, prefix="/v1", tags=["v1-register"])
+api_router.include_router(v1_login.login, prefix="/v1", tags=["v1-login"])
