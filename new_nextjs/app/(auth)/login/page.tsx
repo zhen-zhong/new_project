@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react"; // 1. 导入 useState
-import { register } from "@/services/api"; 
+import { register,login } from "@/services/api"; 
 
 export default function LoginPage() {
   // 2. 创建状态变量
@@ -12,7 +12,7 @@ export default function LoginPage() {
     console.log("用户名:", username);
     console.log("邮箱:", email);
     console.log("密码:", password);
-    const res = await register({ username, email, password });
+    const res = await login({ username, password });
     console.log("Test API Response:", res);
   };
 

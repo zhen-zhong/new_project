@@ -5,7 +5,6 @@ from typing import Optional
 class UserIn(BaseModel):
     """用于用户注册和登录的输入模型"""
     username: str
-    email: str
     password: str
 
 class UserOut(BaseModel):
