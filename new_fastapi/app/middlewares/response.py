@@ -3,7 +3,7 @@
 import json
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
-from starlette.responses import Response, JSONResponse
+from starlette.responses import Response, JSONResponse, StreamingResponse
 from typing import Callable, Awaitable
 
 API_PREFIX = "/api"
@@ -18,6 +18,11 @@ class responseMiddleware(BaseHTTPMiddleware):
 
         response = await call_next(request)
 
+        # 如果是流式响应，则直接返回，
+        if isinstance(response, StreamingResponse):
+            return response
+
+        # 后续的逻辑只处理非流式的成功 JSON 响应
         if (200 <= response.status_code < 300 and
             "application/json" in response.headers.get("content-type", "")):
             
@@ -35,9 +40,11 @@ class responseMiddleware(BaseHTTPMiddleware):
                 "message": "操作成功",
                 "data": data,
             }
+            
             response_headers = dict(response.headers)
             response_headers.pop("content-length", None)
             response_headers.pop("content-type", None)
+            
             return JSONResponse(
                 status_code=response.status_code,
                 content=unified_content,
