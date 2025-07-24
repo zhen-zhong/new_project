@@ -12,7 +12,7 @@ export default function LoginPage() {
     console.log("用户名:", username);
     console.log("邮箱:", email);
     console.log("密码:", password);
-    const res = await login({ username, password });
+    const res = await login({ username,email, password });
     console.log("Test API Response:", res);
   };
 

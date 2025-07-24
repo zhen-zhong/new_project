@@ -6,6 +6,7 @@ class UserIn(BaseModel):
     """用于用户注册和登录的输入模型"""
     username: str
     password: str
+    email: str
 
 class UserOut(BaseModel):
     """用于返回用户信息的输出模型"""
