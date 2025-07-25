@@ -5,7 +5,7 @@ import { VariableSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import MessageType from '@/components/messageType';
 import { Message } from '@/types/chat';
-import { useRouter,useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 // --- 模拟 API 函数，直接写在文件里 ---
 const mockApiSendMessage = async (
@@ -14,7 +14,7 @@ const mockApiSendMessage = async (
 ): Promise<{ conversationId: string; message: Message }> => {
   console.log(`[Mock API] Sending: "${userMessage}" for chatId: ${chatId}`);
   // 模拟网络延迟和 AI思考时间
-  await new Promise(resolve => setTimeout(resolve, 1500)); 
+  await new Promise(resolve => setTimeout(resolve, 1500));
 
   const newConversationId = chatId || `conv-${Date.now()}`;
   const aiResponse: Message = {
@@ -76,7 +76,7 @@ export default function ChatSessionPage() {
       role: 'user',
       content: userInput,
     };
-    
+
     // 立即更新UI，显示用户消息和AI加载状态
     setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
@@ -93,7 +93,7 @@ export default function ChatSessionPage() {
         // 因为重定向会触发useEffect重新加载，所以这里不需要手动设置AI消息
         // 但为了更好的即时性，我们也可以选择在这里更新，然后在useEffect中处理重复
       } else {
-         // 在现有对话中，直接添加AI的回复
+        // 在现有对话中，直接添加AI的回复
         setMessages(prev => [...prev, response.message]);
       }
 
@@ -109,7 +109,7 @@ export default function ChatSessionPage() {
       setIsLoading(false);
     }
   }, [userInput, isLoading, chatId, router]);
-  
+
   // --- react-window 相关的函数 ---
   const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => (
     <div style={style}>
@@ -130,7 +130,7 @@ export default function ChatSessionPage() {
       listRef.current.scrollToItem(messages.length, 'end');
     }
   }, [messages]);
-  
+
   // --- 骨架屏组件 ---
   const ChatSkeleton = () => (
     <div className="p-4 space-y-4">
@@ -175,12 +175,25 @@ export default function ChatSessionPage() {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="输入您的问题..."
-            className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            className="
+              flex-1 p-3 border border-gray-300          
+              rounded-xl                          
+              shadow-sm                           
+              focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+              focus:outline-none                        
+              transition-all duration-200 ease-in-out     
+              placeholder-gray-400                
+            "
             disabled={isLoading}
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed transition"
+            className="
+              px-5 py-2.5 rounded-lg font-semibold text-gray-700 
+              bg-transparent hover:bg-[#0000000f]
+              disabled:text-gray-400 disabled:bg-transparent disabled:cursor-not-allowed 
+              transition-colors duration-200
+            "
             disabled={isLoading || !userInput.trim()}
           >
             {isLoading ? '发送中...' : '发送'}

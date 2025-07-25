@@ -52,10 +52,10 @@ const ConversationItem = React.memo(({ conv, isActive, isSidebarOpen }: {
         className={`
           flex items-center p-3 rounded-md cursor-pointer transition-colors
           ${isSidebarOpen ? 'justify-start' : 'justify-center'} 
-          ${isActive ? 'bg-blue-500 text-white shadow-sm' : 'hover:bg-gray-100'}
+          ${isActive ? 'bg-[#0000000f] text-gray-800' : 'hover:bg-gray-100'}
       `}
       >
-        <MessageSquare className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+        <MessageSquare className={`h-4 w-4 shrink-0 ${isActive ? 'text-gray-500' : 'text-gray-500'}`} />
         {isSidebarOpen && (
           <span className="ml-3 text-sm font-medium truncate flex-1">
             {conv.title}
@@ -108,13 +108,13 @@ export default function Sidebar() {
         >
           <Plus className="h-5 w-5 text-gray-600 shrink-0" />
           <div className={`
-    ml-3 overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out
-    ${isSidebarOpen ? 'max-w-full' : 'max-w-0'}
-  `}>
+            ml-3 overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out
+            ${isSidebarOpen ? 'max-w-full' : 'max-w-0'}
+          `}>
             <span className={`
-      text-sm font-medium text-gray-700 transition-opacity duration-200
-      ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}
-    `}>
+              text-sm font-medium text-gray-700 transition-opacity duration-200
+              ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}
+            `}>
               新建聊天
             </span>
           </div>
