@@ -1,99 +1,159 @@
-// app/(chat)/chat/layout.tsx
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, ReactNode } from 'react';
-import { Plus } from 'lucide-react'; // 引入一个加号图标，提升 UI 效果
+import { Plus, MessageSquare, PanelLeftClose, PanelLeftOpen, Settings } from 'lucide-react';
 
-// 定义会话列表项的数据结构，方便类型检查
+// 类型定义和模拟 API 函数保持不变
 interface Conversation {
   id: string;
   title: string;
-  lastMessage: string;
 }
-
-// 模拟从 API 获取会话列表的函数
-// 在真实应用中，这里会是一个 fetch 或 axios API 调用
 async function getConversations(): Promise<Conversation[]> {
-  console.log("正在获取会话列表...");
-  
-  // 为了演示，我们返回一些硬编码的模拟数据
-  // 在真实应用中，这些数据应该来自你的数据库
+  await new Promise(resolve => setTimeout(resolve, 500));
   return [
-    { id: '1a2b', title: '与 AI 的第一次对话', lastMessage: '好的，这是一个非常棒的进阶需求！...' },
-    { id: '3c4d', title: '关于 Next.js 路由', lastMessage: '当然！让我们用一个清晰的比喻来解释...' },
-    { id: '5e6f', title: '我的 FastAPI 项目', lastMessage: '是的，我们可以用 Pydantic 模型...' },
-    { id: '7g8h', title: '周末出游计划', lastMessage: '听起来不错，我们周六早上出发吧。' },
+    { id: '1a2b', title: '与 AI 的第一次对话' },
+    { id: '3c4d', title: '关于 Next.js 路由' },
+    { id: '1', title: '测试1' },
+    { id: '2', title: '测试2' },
+    { id: '3', title: '测试3' },
+    { id: '4', title: '测试4' },
+    { id: '5', title: '测试5' },
+    { id: '6', title: '测试6' },
+    { id: '7', title: '测试7' },
+    { id: '8', title: '测试8' },
+    { id: '9', title: '测试9' },
+    { id: '10', title: '测试10' },
+    { id: '11', title: '测试11' },
+    { id: '12', title: '测试12' },
+    { id: '13', title: '测试13' },
+    { id: '14', title: '测试14' },
+    { id: '15', title: '测试15' },
+    { id: '16', title: '测试16' },
+    { id: '17', title: '测试17' },
+    { id: '18', title: '测试18' },
+    { id: '19', title: '测试19' },
+    { id: '20', title: '测试20' },
   ];
 }
 
+const SidebarSkeleton = () => (
+  <div className="px-2 space-y-2 animate-pulse">
+    {[...Array(5)].map((_, i) => (
+      <div key={i} className="h-10 bg-gray-200/50 rounded-md"></div>
+    ))}
+  </div>
+);
 
-// 这是共享布局组件，它会包裹所有 /chat/* 路径下的页面
-export default function ChatHistoryLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  // 使用 state 来存储从 API 获取的会话列表
+const Logo = () => (
+  <div className="flex items-center space-x-2">
+    <div className="w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-md"></div>
+    <span className="font-bold text-lg">MyAI</span>
+  </div>
+);
+
+
+export default function RefinedChatLayout({ children }: { children: ReactNode }) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
-  // 使用 usePathname hook 来获取当前的 URL 路径，例如 "/chat/1a2b"
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   const pathname = usePathname();
 
-  // 使用 useEffect 在组件首次加载时获取数据
   useEffect(() => {
-    getConversations().then(data => {
-      setConversations(data);
-    });
-  }, []); // 空依赖数组 [] 意味着这个 effect 只在组件挂载时运行一次
+    setIsLoading(true);
+    getConversations()
+      .then(data => setConversations(data))
+      .finally(() => setIsLoading(false));
+  }, []);
 
   return (
-    // 使用 Flexbox 构建整体的两栏布局
-    <div className="flex h-full overflow-hidden">
-      
-      {/* 侧边栏：会话列表 */}
-      <aside className="w-1/4 min-w-[250px] max-w-[300px] border-r bg-muted/40 flex flex-col">
-        
-        {/* 侧边栏头部 */}
-        <div className="flex justify-between items-center p-4 border-b">
-          <h2 className="text-lg font-bold text-foreground">会话</h2>
-          {/* "新建聊天" 按钮，链接到 /chat 根路径 */}
-          <Link href="/chat" className="p-2 rounded-md hover:bg-accent">
-            <Plus className="h-5 w-5 text-muted-foreground" />
+    <div className="w-full h-screen overflow-hidden flex bg-gray-100">
+
+      <aside
+        className={`
+          bg-white border-r border-gray-200 flex flex-col
+          transition-all duration-300 ease-in-out
+          ${isSidebarOpen ? 'w-64' : 'w-20'} 
+        `}
+      >
+        <div className="p-4 space-y-4 border-b border-gray-200 shrink-0">
+          <div className="flex items-center justify-between h-8">
+            <div className={`transition-opacity duration-200 ${isSidebarOpen ? 'opacity-100' : 'opacity-0'}`}>
+              {isSidebarOpen && <Logo />}
+            </div>
+
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-md hover:bg-gray-100"
+            >
+              {isSidebarOpen ? <PanelLeftClose className="h-5 w-5 text-gray-500" /> : <PanelLeftOpen className="h-5 w-5 text-gray-500" />}
+            </button>
+          </div>
+
+          <Link
+            href="/chat/new"
+            className={`
+              flex items-center p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors
+              ${isSidebarOpen ? 'justify-start' : 'justify-center'}
+            `}
+          >
+            <Plus className="h-5 w-5 text-gray-600 shrink-0" />
+            <span
+              className={`
+                ml-3 text-sm font-medium text-gray-700
+                ${isSidebarOpen ? 'block' : 'hidden'}
+              `}
+            >
+              新建聊天
+            </span>
           </Link>
         </div>
-        
-        {/* 会话列表容器 */}
+
         <div className="flex-1 overflow-y-auto p-2 space-y-1">
-          {conversations.map((conv) => {
-            // 判断当前链接是否为激活状态
+          {isLoading ? <SidebarSkeleton /> : conversations.map((conv) => {
             const isActive = pathname === `/chat/${conv.id}`;
-            
             return (
-              // 使用 Next.js 的 Link 组件进行客户端导航
-              <Link key={conv.id} href={`/chat/${conv.id}`}>
+              <Link key={conv.id} href={`/chat/${conv.id}`} title={conv.title}>
                 <div
-                  className={`cursor-pointer rounded-md p-3 transition-colors ${
-                    // 根据是否激活来应用不同的背景色
-                    isActive 
-                      ? 'bg-accent text-accent-foreground' 
-                      : 'hover:bg-accent/50 text-foreground'
-                  }`}
+                  className={`
+                    flex items-center p-3 rounded-md cursor-pointer transition-colors
+                    ${isSidebarOpen ? 'justify-start' : 'justify-center'} 
+                    ${isActive ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'}
+                `}
                 >
-                  <p className="font-semibold truncate text-sm">{conv.title}</p>
-                  <p className="text-xs text-muted-foreground truncate">{conv.lastMessage}</p>
+                  <MessageSquare className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                  {isSidebarOpen && (
+                    <span className="ml-3 text-sm font-medium truncate flex-1">
+                      {conv.title}
+                    </span>
+                  )}
                 </div>
               </Link>
             );
           })}
         </div>
+
+        <div className="p-2 border-t border-gray-200 shrink-0">
+          <div className="p-3 rounded-md hover:bg-gray-100 cursor-pointer flex items-center">
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white shrink-0">
+              U
+            </div>
+            {/* 当侧边栏展开时显示文字 */}
+            <div className={`ml-3 overflow-hidden transition-all duration-200 ${isSidebarOpen ? 'w-full opacity-100' : 'w-0 opacity-0'}`}>
+              <p className="text-sm font-semibold truncate">User Name</p>
+              <p className="text-xs text-gray-500 truncate">user@example.com</p>
+            </div>
+          </div>
+        </div>
       </aside>
 
-      {/* 主内容区：这里会渲染子页面 */}
+      {/* ======================= 主内容区 ======================= */}
       <main className="flex-1 flex flex-col">
-        {/* ✨ {children} 是一个插槽，Next.js 会在这里插入匹配到的页面组件 */}
-        {/* 例如，当访问 /chat/1a2b 时，这里会渲染 app/(chat)/chat/[chatId]/page.tsx 的内容 */}
-        {children}
+        <div className="flex-1 h-full overflow-y-auto">
+          {children}
+        </div>
       </main>
     </div>
   );
