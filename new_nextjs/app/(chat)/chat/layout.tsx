@@ -1,5 +1,5 @@
 // app/(chat)/chat/layout.tsx
-'use client'; // 这是一个客户端组件，因为它使用了 hooks (useState, useEffect, usePathname)
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
